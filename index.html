@@ -1,405 +1,681 @@
----
-layout: default
-title: "Alberto Carballo Hernández — CV & Repos"
----
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alberto Carballo Hernández — CV & Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+    :root {
+      --bg: #0c0c0f;
+      --surface: #131318;
+      --surface2: #1a1a22;
+      --border: rgba(255,255,255,0.07);
+      --accent: #e8ff47;
+      --accent2: #47b4ff;
+      --accent3: #ff6b6b;
+      --text: #f0f0f0;
+      --muted: #888;
+      --font-display: 'Syne', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+      --font-body: 'DM Sans', sans-serif;
+    }
 
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
-  :root {
-    --cream:     #f5f0e8;
-    --cream-mid: #ede6d6;
-    --cream-dark:#d9d0bc;
-    --green:     #3b5c3e;
-    --green-mid: #527a56;
-    --green-light:#8aab8e;
-    --green-pale: #c8d9c9;
-    --ink:       #2a2e28;
-    --ink-muted: #6b7068;
-    --gold:      #b59a5a;
-    --radius:    6px;
-  }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  html { scroll-behavior: smooth; }
+    /* Noise texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-  body {
-    background-color: var(--cream);
-    color: var(--ink);
-    font-family: 'DM Mono', monospace;
-    font-weight: 300;
-    font-size: 13.5px;
-    line-height: 1.7;
-    min-height: 100vh;
-  }
+    /* Grid background */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-  /* noise texture overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    opacity: .035;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 180px 180px;
-  }
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
 
-  .container {
-    position: relative;
-    z-index: 1;
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 24px 80px;
-  }
+    /* ── HEADER ── */
+    header {
+      padding: 48px 0 0;
+      margin-bottom: 80px;
+    }
 
-  /* ── TOPBAR ── */
-  .topbar {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 52px 0 28px;
-    border-bottom: 1px solid var(--cream-dark);
-    animation: fadeDown .6s ease both;
-  }
+    .header-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
 
-  .title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 600;
-    letter-spacing: -.01em;
-    color: var(--green);
-    line-height: 1.1;
-  }
+    .header-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-  .subtitle {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    margin-top: 6px;
-  }
+    .header-tag::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
 
-  .nav-links {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 6vw, 68px);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
 
-  /* ── BUTTONS ── */
-  .btn {
-    display: inline-block;
-    padding: 7px 16px;
-    border-radius: var(--radius);
-    border: 1.5px solid var(--green);
-    background: transparent;
-    color: var(--green);
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background .18s, color .18s, border-color .18s, transform .12s;
-  }
-  .btn:hover, .btn.active {
-    background: var(--green);
-    color: var(--cream);
-    transform: translateY(-1px);
-  }
-  .btn:active { transform: translateY(0); }
+    h1 span {
+      color: var(--accent);
+    }
 
-  /* ── SECTIONS ── */
-  .section {
-    margin-top: 56px;
-    animation: fadeUp .55s ease both;
-  }
-  .section:nth-child(2) { animation-delay: .1s; }
-  .section:nth-child(3) { animation-delay: .2s; }
-  .section:nth-child(4) { animation-delay: .3s; }
+    .subtitle {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 14px;
+      letter-spacing: 0.05em;
+    }
 
-  .section > h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.55rem;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--green);
-    margin-bottom: 24px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--cream-dark);
-  }
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+      padding-top: 6px;
+    }
 
-  /* ── PROFILE GRID ── */
-  .grid2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    align-items: start;
-  }
-  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+      transition: color 0.2s;
+      letter-spacing: 0.05em;
+    }
 
-  .profile {
-    display: flex;
-    gap: 18px;
-    align-items: flex-start;
-  }
-  .profile img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2.5px solid var(--green-pale);
-    flex-shrink: 0;
-    background: var(--cream-mid);
-  }
+    .nav-link:hover { color: var(--text); }
+    .nav-link:hover .link-icon { background: var(--accent); color: #000; }
 
-  .bio p {
-    color: var(--ink-muted);
-    font-size: 13px;
-    margin-bottom: 12px;
-  }
+    .link-icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
 
-  .section h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    color: var(--green-mid);
-    margin: 0 0 8px;
-  }
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 64px 0;
+      position: relative;
+    }
 
-  .section ul {
-    color: var(--ink-muted);
-    padding-left: 18px;
-    font-size: 13px;
-  }
-  .section ul li { margin-bottom: 4px; }
-  .section ul li::marker { color: var(--green-light); }
+    .divider::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      top: -10px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--bg);
+      padding-right: 16px;
+    }
 
-  .section p.muted {
-    color: var(--ink-muted);
-    font-size: 13px;
-  }
+    /* ── SECTION TITLES ── */
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
 
-  /* ── PILLS ── */
-  .pillrow {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 10px;
-  }
-  .pill {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 99px;
-    border: 1px solid var(--green-pale);
-    background: var(--cream-mid);
-    color: var(--green);
-    font-size: 10.5px;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-  }
-  .pill.featured {
-    background: var(--green);
-    border-color: var(--green);
-    color: var(--cream);
-  }
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3.5vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 32px;
+      line-height: 1.1;
+    }
 
-  /* ── TOOLBAR ── */
-  .toolbar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-  }
-  .input {
-    flex: 1;
-    min-width: 180px;
-    padding: 7px 14px;
-    border: 1.5px solid var(--cream-dark);
-    border-radius: var(--radius);
-    background: var(--cream-mid);
-    color: var(--ink);
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    outline: none;
-    transition: border-color .18s;
-  }
-  .input:focus { border-color: var(--green-light); }
-  .input::placeholder { color: var(--ink-muted); }
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
 
-  .select {
-    padding: 7px 12px;
-    border: 1.5px solid var(--cream-dark);
-    border-radius: var(--radius);
-    background: var(--cream-mid);
-    color: var(--ink);
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    cursor: pointer;
-    outline: none;
-    transition: border-color .18s;
-  }
-  .select:focus { border-color: var(--green-light); }
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
 
-  /* ── CARDS ── */
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 18px;
-  }
+    .profile-img-wrap {
+      position: relative;
+    }
 
-  .card {
-    background: var(--cream-mid);
-    border-radius: 10px;
-    border: 1.5px solid var(--cream-dark);
-    border-top-width: 3px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: transform .18s, box-shadow .18s;
-  }
-  .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 28px rgba(59,92,62,.09);
-  }
+    .profile-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 1px solid var(--accent);
+      opacity: 0.4;
+      transform: rotate(2deg);
+    }
 
-  .card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--ink);
-    margin: 0;
-    line-height: 1.2;
-  }
-  .card .muted {
-    font-size: 12px;
-    color: var(--ink-muted);
-    line-height: 1.55;
-    flex: 1;
-  }
-  .repoMeta {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    font-size: 11px;
-    color: var(--ink-muted);
-    letter-spacing: .04em;
-  }
+    .profile-img-wrap img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%);
+    }
 
-  /* border accent colours */
-  .border-blue   { border-top-color: var(--green); }
-  .border-violet { border-top-color: var(--gold); }
-  .border-emerald{ border-top-color: var(--green-light); }
+    .about-text p {
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 24px;
+      font-size: 15px;
+    }
 
-  /* ── DIVIDER ── */
-  hr { border: none; border-top: 1px solid var(--cream-dark); margin: 40px 0; }
+    /* ── SKILLS PILLS ── */
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+    .pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      letter-spacing: 0.05em;
+      background: var(--surface);
+      transition: border-color 0.2s, color 0.2s;
+    }
 
-  /* ── FOOTER ── */
-  footer {
-    text-align: center;
-    font-size: 11px;
-    letter-spacing: .08em;
-    color: var(--ink-muted);
-    margin-top: 64px;
-    padding-top: 24px;
-    border-top: 1px solid var(--cream-dark);
-    text-transform: uppercase;
-  }
-  footer span { color: var(--green-light); }
-</style>
+    .pill:hover { border-color: var(--accent); color: var(--accent); }
+    .pill.featured { border-color: var(--accent); color: var(--accent); background: rgba(232,255,71,0.06); }
+    .pill.lang { border-color: rgba(71,180,255,0.4); color: var(--accent2); background: rgba(71,180,255,0.05); }
 
-<div class="container">
-  <header class="topbar">
-    <div>
-      <h1 class="title">Alberto Carballo Hernández</h1>
-      <div class="subtitle">Estudiante de Desarrollo de Aplicaciones Multiplataforma · 1º DAM</div>
+    /* ── TWO-COL GRID ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+    .info-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 24px;
+    }
+
+    .info-block h3 {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .info-block ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .info-block li {
+      color: var(--muted);
+      font-size: 14px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .info-block li:last-child { border-bottom: none; }
+
+    .info-block li::before {
+      content: '→';
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .goal-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 24px;
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 24px;
+    }
+
+    .goal-block strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    /* ── TOOLBAR ── */
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+
+    .search-input {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 8px 14px;
+      outline: none;
+      flex: 1;
+      min-width: 160px;
+      transition: border-color 0.2s;
+      letter-spacing: 0.03em;
+    }
+
+    .search-input::placeholder { color: var(--muted); }
+    .search-input:focus { border-color: rgba(232,255,71,0.4); }
+
+    .sort-select {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 8px 14px;
+      outline: none;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 8px 14px;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.15s;
+    }
+
+    .filter-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+    .filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
+
+    /* ── REPO CARDS ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: transparent;
+      transition: background 0.2s;
+    }
+
+    .card:hover {
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+    }
+
+    .card.blue::before { background: var(--accent2); }
+    .card.violet::before { background: #b47fff; }
+    .card.emerald::before { background: #47ffb4; }
+
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .card-desc {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .card-meta {
+      display: flex;
+      gap: 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+
+    .card-link {
+      display: inline-block;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 7px 16px;
+      text-decoration: none;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      transition: all 0.15s;
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+
+    .card-link:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+
+    /* ── EMPTY STATE ── */
+    .empty {
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 32px 0;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── LOADING ── */
+    .loading-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .skeleton {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 22px;
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skeleton::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+      animation: shimmer 1.5s infinite;
+    }
+
+    @keyframes shimmer {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(100%); }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 80px;
+      padding: 32px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer p {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up { animation: fadeUp 0.6s ease both; }
+    .fade-up:nth-child(2) { animation-delay: 0.1s; }
+    .fade-up:nth-child(3) { animation-delay: 0.2s; }
+
+    .status-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      margin-right: 4px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    #featured-section { margin-bottom: 64px; }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="fade-up">
+    <div class="header-inner">
+      <div>
+        <div class="header-tag">
+          <span class="status-dot"></span>
+          Disponible para prácticas
+        </div>
+        <h1>Alberto<br>Carballo<br><span>Hernández</span></h1>
+        <div class="subtitle">1º DAM · Desarrollo de Aplicaciones Multiplataforma</div>
+      </div>
+      <nav class="nav-links">
+        <a class="nav-link" href="https://www.linkedin.com/in/alberto-carballo-hernández-b238b42b0" target="_blank" rel="noreferrer">
+          <span class="link-icon">in</span>
+          LinkedIn
+        </a>
+        <a class="nav-link" href="https://github.com/albertocarher" target="_blank" rel="noreferrer">
+          <span class="link-icon">gh</span>
+          GitHub
+        </a>
+        <a class="nav-link" href="mailto:albertocarballohernandez@gmail.com">
+          <span class="link-icon">@</span>
+          Email
+        </a>
+      </nav>
     </div>
-    <nav class="nav-links">
-      <a class="btn" href="https://www.linkedin.com/in/alberto-carballo-hernández-b238b42b0" target="_blank">LinkedIn</a>
-      <a class="btn" href="https://github.com/albertocarher" target="_blank">GitHub</a>
-      <a class="btn" href="mailto:albertocarballohernandez@gmail.com">Email</a>
-    </nav>
   </header>
 
-  <section class="section">
-    <h2>Sobre mí</h2>
-    <div class="grid2">
-      <div class="profile">
-        <img src="assets/img/perfil.jpg" alt="Foto de perfil">
-        <div class="bio">
-          <p>
-            Hola! Soy un alumno del Ciclo de Desarrollo de Aplicaciones Multiplataformas aprendiendo programación.
-          </p>
-          <div class="pillrow">
-            <span class="pill">Java</span>
-            <span class="pill">SQL</span>
-            <span class="pill">HTML/CSS</span>
-            <span class="pill">Git</span>
+  <!-- ABOUT -->
+  <section class="fade-up">
+    <div class="section-label">01 — Sobre mí</div>
+    <h2>Quién soy</h2>
+
+    <div class="about-grid">
+      <div class="profile-img-wrap">
+        <img src="assets/img/perfil.jpg" alt="Foto de perfil de Alberto" />
+      </div>
+      <div class="about-text">
+        <p>
+          Hola, soy Alberto. Estudiante del Ciclo de Desarrollo de Aplicaciones Multiplataforma, aprendiendo sobre programación orientada a objetos, bases de datos y desarrollo web.
+        </p>
+        <div class="pills">
+          <span class="pill lang">Java</span>
+          <span class="pill lang">SQL</span>
+          <span class="pill lang">HTML / CSS</span>
+          <span class="pill lang">Git</span>
+        </div>
+
+        <div class="two-col">
+          <div class="info-block">
+            <h3>Proyectos de clase</h3>
+            <ul>
+              <li>App de Notas — CRUD + BBDD</li>
+              <li>Gestor de Tareas — POO + tests</li>
+            </ul>
+          </div>
+          <div class="info-block">
+            <h3>Intereses</h3>
+            <ul>
+              <li>Backend con Java</li>
+              <li>Bases de datos relacionales</li>
+              <li>Desarrollo web</li>
+            </ul>
           </div>
         </div>
-      </div>
 
-      <div>
-        <h3>Proyectos de clase</h3>
-        <ul>
-          <li>Proyecto DAM: "App de Notas" (CRUD + BBDD)</li>
-          <li>Proyecto Java: "Gestor de tareas" (POO + tests)</li>
-        </ul>
-
-        <h3 style="margin-top:20px">Objetivo</h3>
-        <p class="muted">
-          Busco prácticas para mejorar y aprender más en backend con Java y HTML.
-        </p>
+        <div class="goal-block">
+          <strong>Objetivo</strong>
+          Busco prácticas para mejorar y aprender más en backend con Java y HTML, aplicando los conocimientos adquiridos en un entorno real.
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <div class="divider" data-label="proyectos"></div>
+
+  <!-- FEATURED REPOS -->
+  <section id="featured-section" class="fade-up">
+    <div class="section-label">02 — Destacados</div>
     <h2>Proyectos destacados</h2>
-    <div id="featured" class="cards"></div>
+    <div id="featured" class="cards">
+      <div class="loading-grid" style="display:contents">
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+      </div>
+    </div>
   </section>
 
-  <section class="section">
+  <div class="divider" data-label="repositorios"></div>
+
+  <!-- ALL REPOS -->
+  <section class="fade-up">
+    <div class="section-label">03 — Repositorios</div>
     <h2>Mis repositorios</h2>
+
     <div class="toolbar">
-      <input id="q" class="input" placeholder="Buscar repositorios…" />
-      <select id="sort" class="select">
+      <input id="q" class="search-input" placeholder="Buscar repositorios..." />
+      <select id="sort" class="sort-select">
         <option value="updated">Actividad reciente</option>
         <option value="stars">Estrellas</option>
         <option value="name">Nombre</option>
       </select>
-      <button class="btn active" data-topic="all">Todos</button>
-      <button class="btn" data-topic="showcase">showcase</button>
-      <button class="btn" data-topic="web">web</button>
-      <button class="btn" data-topic="backend">backend</button>
+      <button class="filter-btn active" data-topic="all">Todos</button>
+      <button class="filter-btn" data-topic="showcase">showcase</button>
+      <button class="filter-btn" data-topic="web">web</button>
+      <button class="filter-btn" data-topic="backend">backend</button>
     </div>
 
-    <div style="height:16px"></div>
-    <div id="repos" class="cards"></div>
+    <div id="repos" class="cards">
+      <div class="loading-grid" style="display:contents">
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+      </div>
+    </div>
   </section>
 
   <footer>
-    <span>✦</span> Alberto Carballo Hernández · DAM 2025 <span>✦</span>
+    <p>Alberto Carballo Hernández · <a href="mailto:albertocarballohernandez@gmail.com">albertocarballohernandez@gmail.com</a></p>
+    <p><span class="status-dot"></span> Datos cargados desde la API de GitHub</p>
   </footer>
+
 </div>
 
 <script>
@@ -408,18 +684,18 @@ title: "Alberto Carballo Hernández — CV & Repos"
   let allRepos = [];
   let activeTopic = "all";
 
-  function formatDate(iso){
+  function formatDate(iso) {
     const d = new Date(iso);
-    return d.toLocaleDateString("es-ES", {year:"numeric", month:"short", day:"2-digit"});
-  }
-  function cardBorderByIndex(i){
-    return ["border-blue","border-violet","border-emerald"][i % 3];
+    return d.toLocaleDateString("es-ES", { year: "numeric", month: "short", day: "2-digit" });
   }
 
-  async function fetchRepos(){
+  const COLORS = ["blue", "violet", "emerald"];
+  function cardColor(i) { return COLORS[i % 3]; }
+
+  async function fetchRepos() {
     const url = `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`;
-    const res = await fetch(url, { headers: { "Accept":"application/vnd.github+json" }});
-    if(!res.ok) throw new Error("No se pudo leer la API de GitHub. Revisa tu usuario.");
+    const res = await fetch(url, { headers: { "Accept": "application/vnd.github+json" } });
+    if (!res.ok) throw new Error("No se pudo leer la API de GitHub. Revisa el usuario.");
     const repos = await res.json();
     return repos.map(r => ({
       name: r.name,
@@ -432,72 +708,68 @@ title: "Alberto Carballo Hernández — CV & Repos"
     }));
   }
 
-  function renderFeatured(repos){
-    const featured = repos.filter(r => r.topics.includes(FEATURED_TOPIC)).slice(0, 6);
-    const el = document.getElementById("featured");
-    el.innerHTML = featured.length ? "" : `<div class="muted">Aún no tienes repos con topic <b>${FEATURED_TOPIC}</b>.</div>`;
-    featured.forEach((r, i) => {
-      const topics = r.topics.slice(0, 4).map(t => `<span class="pill">${t}</span>`).join("");
-      el.insertAdjacentHTML("beforeend", `
-        <article class="card ${cardBorderByIndex(i)}">
-          <h3>${r.name}</h3>
-          <div class="muted">${r.description || "Sin descripción (añádela en GitHub 😉)"}</div>
-          <div class="pillrow">
-            <span class="pill featured">Featured</span>${topics}
-          </div>
-          <div class="repoMeta">
-            <span>⭐ ${r.stargazers_count}</span>
-            <span>🧩 ${r.language}</span>
-            <span>🕒 ${formatDate(r.updated_at)}</span>
-          </div>
-          <a class="btn" href="${r.html_url}" target="_blank" rel="noreferrer">Ver repo</a>
-        </article>`);
-    });
+  function buildCard(r, i, label) {
+    const topics = r.topics.slice(0, 5).map(t =>
+      `<span class="pill ${t === FEATURED_TOPIC ? 'featured' : ''}">${t}</span>`
+    ).join("");
+
+    return `
+      <article class="card ${cardColor(i)}">
+        <h3>${r.name}</h3>
+        <div class="card-desc">${r.description || '<span style="font-style:italic;color:var(--muted);font-size:12px;">Sin descripción</span>'}</div>
+        <div class="pills">${topics || '<span class="pill">sin topics</span>'}</div>
+        <div class="card-meta">
+          <span>⭐ ${r.stargazers_count}</span>
+          <span>◈ ${r.language}</span>
+          <span>↻ ${formatDate(r.updated_at)}</span>
+        </div>
+        <a class="card-link" href="${r.html_url}" target="_blank" rel="noreferrer">${label || 'Ver repo →'}</a>
+      </article>
+    `;
   }
 
-  function applyFilters(repos){
+  function renderFeatured(repos) {
+    const featured = repos.filter(r => r.topics.includes(FEATURED_TOPIC)).slice(0, 6);
+    const el = document.getElementById("featured");
+    if (!featured.length) {
+      el.innerHTML = `<div class="empty">// Aún no hay repos con topic "${FEATURED_TOPIC}".</div>`;
+      return;
+    }
+    el.innerHTML = featured.map((r, i) => buildCard(r, i, 'Ver proyecto →')).join("");
+  }
+
+  function applyFilters(repos) {
     const q = (document.getElementById("q").value || "").toLowerCase();
     const sort = document.getElementById("sort").value;
+
     let out = repos.filter(r => {
-      const matchesText = r.name.toLowerCase().includes(q) || (r.description||"").toLowerCase().includes(q);
+      const matchesText = r.name.toLowerCase().includes(q) || r.description.toLowerCase().includes(q);
       const matchesTopic = activeTopic === "all" ? true : r.topics.includes(activeTopic);
       return matchesText && matchesTopic;
     });
-    if (sort === "updated") out.sort((a,b) => new Date(b.updated_at) - new Date(a.updated_at));
-    if (sort === "stars")   out.sort((a,b) => (b.stargazers_count||0) - (a.stargazers_count||0));
-    if (sort === "name")    out.sort((a,b) => a.name.localeCompare(b.name));
+
+    if (sort === "updated") out.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+    if (sort === "stars")   out.sort((a, b) => b.stargazers_count - a.stargazers_count);
+    if (sort === "name")    out.sort((a, b) => a.name.localeCompare(b.name));
     return out;
   }
 
-  function renderRepos(repos){
+  function renderRepos(repos) {
     const el = document.getElementById("repos");
     const list = applyFilters(repos);
-    el.innerHTML = list.length ? "" : `<div class="muted">No hay resultados con esos filtros.</div>`;
-    list.forEach((r, i) => {
-      const topics = (r.topics && r.topics.length)
-        ? r.topics.slice(0, 6).map(t => `<span class="pill">${t}</span>`).join("")
-        : `<span class="pill">sin topics</span>`;
-      el.insertAdjacentHTML("beforeend", `
-        <article class="card ${cardBorderByIndex(i)}">
-          <h3>${r.name}</h3>
-          <div class="muted">${r.description || "Sin descripción"}</div>
-          <div class="pillrow">${topics}</div>
-          <div class="repoMeta">
-            <span>⭐ ${r.stargazers_count}</span>
-            <span>🧩 ${r.language}</span>
-            <span>🕒 ${formatDate(r.updated_at)}</span>
-          </div>
-          <a class="btn" href="${r.html_url}" target="_blank" rel="noreferrer">Abrir</a>
-        </article>`);
-    });
+    if (!list.length) {
+      el.innerHTML = `<div class="empty">// No hay resultados con esos filtros.</div>`;
+      return;
+    }
+    el.innerHTML = list.map((r, i) => buildCard(r, i, 'Abrir →')).join("");
   }
 
-  function bindUI(){
+  function bindUI() {
     document.getElementById("q").addEventListener("input", () => renderRepos(allRepos));
     document.getElementById("sort").addEventListener("change", () => renderRepos(allRepos));
-    document.querySelectorAll(".btn[data-topic]").forEach(btn => {
+    document.querySelectorAll(".filter-btn[data-topic]").forEach(btn => {
       btn.addEventListener("click", () => {
-        document.querySelectorAll(".btn[data-topic]").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".filter-btn[data-topic]").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         activeTopic = btn.dataset.topic;
         renderRepos(allRepos);
@@ -505,7 +777,7 @@ title: "Alberto Carballo Hernández — CV & Repos"
     });
   }
 
-  async function main(){
+  async function main() {
     bindUI();
     allRepos = await fetchRepos();
     renderFeatured(allRepos);
@@ -513,8 +785,11 @@ title: "Alberto Carballo Hernández — CV & Repos"
   }
 
   main().catch(err => {
-    document.getElementById("featured").innerHTML = `<div class="muted">${err.message}</div>`;
-    document.getElementById("repos").innerHTML    = `<div class="muted">${err.message}</div>`;
+    document.getElementById("featured").innerHTML = `<div class="empty">// Error: ${err.message}</div>`;
+    document.getElementById("repos").innerHTML = `<div class="empty">// Error: ${err.message}</div>`;
     console.error(err);
   });
 </script>
+
+</body>
+</html>
