@@ -586,8 +586,6 @@
             <span class="pill">Git</span>
           </div>
         </div>
-
-
       </div>
     </div>
   </section>
@@ -750,4 +748,13 @@
       renderFeatured(allRepos);
       renderRepos(allRepos);
     } catch (err) {
- </script>
+      document.getElementById("featured").innerHTML = `<div class="empty">Error al cargar repos: ${err.message}</div>`;
+      document.getElementById("repos").innerHTML = `<div class="empty">Error al cargar repos: ${err.message}</div>`;
+    }
+  }
+
+  main();
+</script>
+
+</body>
+</html>
